@@ -1,3 +1,4 @@
+import { AuthGardService } from './services/auth-gard.service';
 import { AuthService } from './services/auth.service';
 import { AppareilService } from './services/appareil.service';
 import { NgModule } from '@angular/core';
@@ -22,7 +23,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [AppareilService, AuthService],
+  providers: [AppareilService, AuthService, AuthGardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

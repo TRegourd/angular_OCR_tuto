@@ -13,12 +13,13 @@ export class AuthComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authStatus = false;
+    this.authStatus = this.authService.isAuth;
   }
 
   onSignIn() {
     this.authService.signIn().then(() => {
       this.router.navigate(['/appareils']);
+      console.log('connexion reuissie');
       this.authStatus = this.authService.isAuth;
     });
   }
