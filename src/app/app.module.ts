@@ -12,6 +12,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppareilViewComponent,
     SingleAppareilComponent,
     NotFoundComponent,
+    EditAppareilComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [AppareilService, AuthService, AuthGardService],

@@ -48,5 +48,14 @@ export class AppareilService {
     this.emitAppareilSubject();
   }
 
+  addAppareil(name: string, status: string) {
+    this.appareils.push({
+      name: name,
+      status: status,
+      id: Math.round(Math.random() * 1000),
+    });
+    this.emitAppareilSubject();
+  }
+
   constructor() {}
 }
