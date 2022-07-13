@@ -1,3 +1,5 @@
+import { NotFoundComponent } from './not-found/not-found.component';
+import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import { NgModule } from '@angular/core';
@@ -7,6 +9,9 @@ export const routes: Routes = [
   { path: '', component: AppareilViewComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'appareils', component: AppareilViewComponent },
+  { path: 'appareils/:id', component: SingleAppareilComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found' },
 ];
 
 @NgModule({

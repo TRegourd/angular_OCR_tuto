@@ -5,10 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class AppareilService {
   appareils = [
-    { name: 'Machine à laver', status: 'éteint' },
-    { name: 'Ordinateur', status: 'allumé' },
-    { name: 'Television', status: 'éteint' },
+    { id: 1, name: 'Machine à laver', status: 'éteint' },
+    { id: 2, name: 'Ordinateur', status: 'allumé' },
+    { id: 3, name: 'Television', status: 'éteint' },
   ];
+
+  getAppareilById(id: number) {
+    const appareil = this.appareils.find((appareil) => {
+      return appareil.id === id;
+    });
+    return appareil;
+  }
 
   switchOnAll() {
     for (let appareil of this.appareils) {
