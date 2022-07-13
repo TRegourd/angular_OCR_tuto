@@ -6,9 +6,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppareilComponent } from './appareil/appareil.component';
+import { AuthComponent } from './auth/auth.component';
+import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 
 @NgModule({
-  declarations: [AppComponent, AppareilComponent],
+  declarations: [
+    AppComponent,
+    AppareilComponent,
+    AuthComponent,
+    AppareilViewComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [AppareilService],
   bootstrap: [AppComponent],
