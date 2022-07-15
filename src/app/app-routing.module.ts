@@ -1,3 +1,4 @@
+import { UserListComponent } from './user-list/user-list.component';
 import { AuthGardService } from './services/auth-gard.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
@@ -18,6 +19,11 @@ export const routes: Routes = [
     path: 'appareils/:id',
     canActivate: [AuthGardService],
     component: SingleAppareilComponent,
+  },
+  {
+    path: 'users',
+    canActivate: [AuthGardService],
+    component: UserListComponent,
   },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' },

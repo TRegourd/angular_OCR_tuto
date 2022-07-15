@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { AuthGardService } from './services/auth-gard.service';
 import { AuthService } from './services/auth.service';
 import { AppareilService } from './services/appareil.service';
@@ -13,6 +14,7 @@ import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,10 @@ import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
     SingleAppareilComponent,
     NotFoundComponent,
     EditAppareilComponent,
+    UserListComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [AppareilService, AuthService, AuthGardService],
+  providers: [AppareilService, AuthService, AuthGardService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
