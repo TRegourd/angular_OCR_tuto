@@ -2,17 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+export interface IAppareil {
+  id: number;
+  name: string;
+  status: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AppareilService {
-  appareilSubject = new Subject<any[]>();
+  appareilSubject = new Subject<IAppareil[]>();
 
-  private appareils = [
-    { id: 1, name: 'Machine à laver', status: 'éteint' },
-    { id: 2, name: 'Ordinateur', status: 'allumé' },
-    { id: 3, name: 'Television', status: 'éteint' },
-  ];
+  private appareils: IAppareil[] = [];
 
   emitAppareilSubject() {
     this.appareilSubject.next(this.appareils.slice());
@@ -30,6 +32,7 @@ export class AppareilService {
       appareil.status = 'allumé';
     }
     this.emitAppareilSubject();
+    this.saveAppareilToServer();
   }
 
   switchOffAll() {
@@ -37,6 +40,7 @@ export class AppareilService {
       appareil.status = 'éteint';
     }
     this.emitAppareilSubject();
+    this.saveAppareilToServer();
   }
 
   switchOffOne(index: number) {
@@ -56,6 +60,13 @@ export class AppareilService {
       id: Math.round(Math.random() * 1000),
     });
     this.emitAppareilSubject();
+    this.saveAppareilToServer();
+  }
+
+  deleteAppareil(index: number) {
+    this.appareils.splice(index, 1);
+    this.emitAppareilSubject();
+    this.saveAppareilToServer();
   }
 
   constructor(private httpClient: HttpClient) {}
@@ -68,6 +79,21 @@ export class AppareilService {
       )
       .subscribe({
         next: () => console.log('appareil saved to server'),
+        error: (e) => console.error(e),
+        complete: () => console.info('complete'),
+      });
+  }
+
+  getAppareilFromServer() {
+    this.httpClient
+      .get<IAppareil[]>(
+        'https://ocr-angluar-http-client-demo-default-rtdb.europe-west1.firebasedatabase.app/appareils.json'
+      )
+      .subscribe({
+        next: (response) => {
+          this.appareils = response;
+          this.emitAppareilSubject();
+        },
         error: (e) => console.error(e),
         complete: () => console.info('complete'),
       });

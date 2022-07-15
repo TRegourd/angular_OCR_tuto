@@ -1,4 +1,4 @@
-import { AppareilService } from './../services/appareil.service';
+import { AppareilService, IAppareil } from './../services/appareil.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./appareil-view.component.scss'],
 })
 export class AppareilViewComponent implements OnInit {
-  appareils!: any[];
+  appareils!: IAppareil[];
   appareilSubscription!: Subscription;
 
   lastUpdated = new Promise<Date>((resolve, reject) => {
@@ -22,10 +22,11 @@ export class AppareilViewComponent implements OnInit {
 
   ngOnInit() {
     this.appareilSubscription = this.appareilService.appareilSubject.subscribe(
-      (appareils: any[]) => {
+      (appareils: IAppareil[]) => {
         this.appareils = appareils;
       }
     );
+    this.onFetch();
     this.appareilService.emitAppareilSubject();
   }
 
@@ -39,5 +40,9 @@ export class AppareilViewComponent implements OnInit {
 
   onSave() {
     this.appareilService.saveAppareilToServer();
+  }
+
+  onFetch() {
+    this.appareilService.getAppareilFromServer();
   }
 }
