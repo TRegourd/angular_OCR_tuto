@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -57,5 +58,18 @@ export class AppareilService {
     this.emitAppareilSubject();
   }
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
+
+  saveAppareilToServer() {
+    this.httpClient
+      .put(
+        'https://ocr-angluar-http-client-demo-default-rtdb.europe-west1.firebasedatabase.app/appareils.json',
+        this.appareils
+      )
+      .subscribe({
+        next: () => console.log('appareil saved to server'),
+        error: (e) => console.error(e),
+        complete: () => console.info('complete'),
+      });
+  }
 }

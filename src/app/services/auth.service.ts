@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,6 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   isAuth: boolean = false;
+
+  constructor(private httpClient: HttpClient) {}
 
   signIn() {
     return new Promise<boolean>((resolve, reject) => {
@@ -18,6 +21,4 @@ export class AuthService {
   signOut() {
     return (this.isAuth = false);
   }
-
-  constructor() {}
 }
