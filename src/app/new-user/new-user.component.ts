@@ -1,7 +1,7 @@
 import { User } from './../models/user.model';
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-user',
@@ -24,8 +24,9 @@ export class NewUserComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       drinkpreference: ['', Validators.required],
+      hobbies: this.formBuilder.array([]),
     });
   }
 
@@ -35,8 +36,18 @@ export class NewUserComponent implements OnInit {
       formValue['firstName'],
       formValue['lastName'],
       formValue['email'],
-      formValue['drinkpreference']
+      formValue['drinkpreference'],
+      formValue['hobbies'] ? formValue['hobbies'] : []
     );
     this.userServices.addUser(newUser);
+  }
+
+  getHobbies() {
+    return this.userForm.get('hobbies') as FormArray;
+  }
+
+  onAddHobby() {
+    const newHobbyControl = this.formBuilder.control('', Validators.required);
+    this.getHobbies().push(newHobbyControl);
   }
 }
