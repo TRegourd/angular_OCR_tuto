@@ -46,11 +46,13 @@ export class AppareilService {
   switchOffOne(index: number) {
     this.appareils[index].status = 'éteint';
     this.emitAppareilSubject();
+    this.saveAppareilToServer();
   }
 
   switchOnOne(index: number) {
     this.appareils[index].status = 'allumé';
     this.emitAppareilSubject();
+    this.saveAppareilToServer();
   }
 
   addAppareil(name: string, status: string) {
